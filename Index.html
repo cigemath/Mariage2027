@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Notre Mariage · 31 Juillet 2027</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Raleway:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#c8a96e;--gold2:#e2cfa0;--dark:#16120e;--cream:#faf7f2;
+  --brown:#3d2b1f;--muted:#8a7060;--light:#f0ebe3;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Raleway',sans-serif;background:var(--cream);color:var(--dark);overflow-x:hidden}
+.page{display:none;min-height:100vh;animation:fadeIn .45s ease}
+.page.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.ribbon{position:fixed;top:0;left:0;right:0;z-index:999;background:rgba(22,18,14,.97);border-bottom:1px solid rgba(200,169,110,.2);backdrop-filter:blur(10px)}
+.ribbon-inner{max-width:1100px;margin:0 auto;display:flex;align-items:stretch;justify-content:center;flex-wrap:wrap}
+.ribbon-logo{font-family:'Playfair Display',serif;font-size:.82rem;font-style:italic;color:var(--gold);padding:0 1.5rem;display:flex;align-items:center;cursor:pointer;border-right:1px solid rgba(200,169,110,.15);white-space:nowrap}
+.ribbon-logo:hover{color:var(--gold2)}
+.nav-item{position:relative}
+.nav-btn{display:flex;align-items:center;gap:.4rem;padding:1rem 1.2rem;background:none;border:none;color:rgba(255,255,255,.5);font-family:'Raleway',sans-serif;font-size:.67rem;font-weight:400;letter-spacing:.28em;text-transform:uppercase;cursor:pointer;transition:color .2s;white-space:nowrap;border-bottom:2px solid transparent}
+.nav-btn:hover,.nav-btn.active{color:var(--gold);border-bottom-color:var(--gold)}
+.nav-btn svg{width:8px;height:8px;transition:transform .2s;flex-shrink:0}
+.nav-btn.open svg{transform:rotate(180deg)}
+.dropdown{position:absolute;top:100%;left:50%;transform:translateX(-50%);background:rgba(22,18,14,.99);border:1px solid rgba(200,169,110,.2);border-top:2px solid var(--gold);min-width:205px;display:none;z-index:1000}
+.dropdown.open{display:block;animation:dSlide .17s ease}
+@keyframes dSlide{from{opacity:0;transform:translateX(-50%) translateY(-5px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+.dd-item{display:flex;align-items:center;gap:.75rem;padding:.78rem 1.3rem;color:rgba(255,255,255,.58);font-size:.66rem;letter-spacing:.17em;text-transform:uppercase;border-bottom:1px solid rgba(200,169,110,.07);cursor:pointer;transition:all .17s}
+.dd-item:last-child{border-bottom:none}
+.dd-item:hover{color:var(--gold);background:rgba(200,169,110,.06);padding-left:1.65rem}
+.dd-dot{width:4px;height:4px;border-radius:50%;background:var(--gold);opacity:.5;flex-shrink:0}
+.pg-shell{padding-top:56px}
+.pg-hero{padding:5rem 2rem 3.5rem;text-align:center;background:var(--dark);position:relative;overflow:hidden}
+.pg-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(200,169,110,.35),transparent)}
+.pg-hero-glow{position:absolute;inset:0;background:radial-gradient(ellipse 80% 120% at 50% -10%,rgba(200,169,110,.1) 0%,transparent 65%)}
+.pg-eyebrow{font-size:.6rem;letter-spacing:.5em;text-transform:uppercase;color:var(--gold);opacity:.8;margin-bottom:.9rem;position:relative}
+.pg-title{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(2.4rem,5vw,4rem);font-weight:400;color:#fff;position:relative}
+.pg-sub{font-size:.72rem;font-weight:300;letter-spacing:.2em;color:rgba(255,255,255,.28);margin-top:.9rem;text-transform:uppercase;position:relative}
+.pg-body{max-width:900px;margin:0 auto;padding:4rem 2rem}
+#page-home{background:var(--dark);display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;text-align:center;position:relative;overflow:hidden}
+.hbg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 15% 40%,rgba(200,169,110,.13) 0%,transparent 70%),radial-gradient(ellipse 60% 50% at 85% 60%,rgba(200,169,110,.09) 0%,transparent 70%),linear-gradient(165deg,#16120e 0%,#2a1b11 55%,#16120e 100%)}
+.hring{position:absolute;border-radius:50%;border:1px solid rgba(200,169,110,.09);animation:rpulse 9s ease-in-out infinite}
+.hring:nth-child(1){width:400px;height:400px}
+.hring:nth-child(2){width:580px;height:580px;animation-delay:2s;border-color:rgba(200,169,110,.05)}
+.hring:nth-child(3){width:760px;height:760px;animation-delay:4s;border-color:rgba(200,169,110,.03)}
+@keyframes rpulse{0%,100%{transform:scale(1)}50%{transform:scale(1.04);opacity:.5}}
+.hcontent{position:relative;z-index:2;padding:2rem}
+.heyebrow{font-size:.64rem;font-weight:300;letter-spacing:.5em;text-transform:uppercase;color:var(--gold);opacity:.85;margin-bottom:1.8rem}
+.hnames{font-family:'Playfair Display',serif;font-size:clamp(4rem,9vw,7rem);font-weight:400;color:#fff;line-height:.9}
+.hnames .it{font-style:italic;color:var(--gold2)}
+.hamp{font-family:'Playfair Display',serif;font-style:italic;color:var(--gold);font-size:clamp(2.2rem,4.5vw,4rem);display:block;margin:.35rem 0}
+.hsep{width:70px;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);margin:2rem auto}
+.hdate{font-size:.7rem;font-weight:300;letter-spacing:.4em;text-transform:uppercase;color:rgba(255,255,255,.38);margin-bottom:.5rem}
+.hvenue{font-family:'Playfair Display',serif;font-style:italic;font-size:1.05rem;color:rgba(255,255,255,.22)}
+.hhint{margin-top:3.5rem;font-size:.6rem;letter-spacing:.35em;text-transform:uppercase;color:rgba(255,255,255,.18);display:flex;align-items:center;gap:.8rem;justify-content:center}
+.hhint::before,.hhint::after{content:'';width:35px;height:1px;background:rgba(255,255,255,.1)}
+.gallery-intro{text-align:center;margin-bottom:3rem}
+.gallery-intro p{font-size:.9rem;font-weight:300;line-height:1.9;color:var(--muted);max-width:520px;margin:0 auto}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.g-item{position:relative;overflow:hidden;cursor:pointer;background:var(--light)}
+.g-item:nth-child(1){grid-column:span 2;grid-row:span 2}
+.g-item:nth-child(5){grid-column:span 2}
+.g-ph{width:100%;padding-top:78%;position:relative;background:linear-gradient(135deg,#e8e0d4,#d4c8b8);overflow:hidden}
+.g-item:nth-child(1) .g-ph{padding-top:63%}
+.g-item:nth-child(5) .g-ph{padding-top:52%}
+.g-ph-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem}
+.g-icon{font-size:1.8rem;opacity:.3}
+.g-lbl{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--muted);opacity:.7}
+.g-item::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,0);transition:background .3s}
+.g-item:hover::after{background:rgba(200,169,110,.12)}
+.upload-note{margin-top:2.5rem;padding:1.4rem;border:1px dashed rgba(200,169,110,.3);text-align:center;font-size:.8rem;font-weight:300;color:var(--muted);line-height:1.7}
+.upload-note strong{color:var(--gold);font-weight:500}
+.menu-card{max-width:600px;margin:0 auto;border:1px solid rgba(200,169,110,.2);padding:2.5rem 3rem;background:#fff;position:relative}
+.menu-card::before{content:'';position:absolute;top:11px;left:11px;right:11px;bottom:11px;border:1px solid rgba(200,169,110,.09);pointer-events:none}
+.mc-title{font-family:'Playfair Display',serif;font-style:italic;font-size:1.55rem;color:var(--brown);text-align:center;margin-bottom:.3rem}
+.mc-sub{text-align:center;font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:2rem}
+.mc-divider{border:none;height:1px;background:linear-gradient(to right,transparent,rgba(200,169,110,.3),transparent);margin:1.4rem 0}
+.mc-sec{font-size:.63rem;font-weight:500;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:.9rem}
+.mi{margin-bottom:.85rem}
+.mi-name{font-family:'Playfair Display',serif;font-size:.98rem;font-weight:500;color:var(--brown)}
+.mi-desc{font-size:.78rem;font-weight:300;color:var(--muted);display:block;margin-top:.12rem;line-height:1.5}
+.mc-note{margin-top:1.8rem;padding:.9rem 1.2rem;background:var(--cream);font-size:.78rem;font-weight:300;color:var(--muted);line-height:1.7;border-left:2px solid var(--gold)}
+.place-list{display:flex;flex-direction:column;gap:1rem}
+.pc{display:grid;grid-template-columns:4px 1fr auto;background:#fff;border:1px solid #ece6de;overflow:hidden;transition:box-shadow .2s,transform .2s}
+.pc:hover{box-shadow:0 5px 20px rgba(0,0,0,.07);transform:translateX(3px)}
+.pc-accent{background:var(--gold)}
+.pc-body{padding:1.3rem 1.5rem}
+.pc-name{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:500;color:var(--brown);margin-bottom:.2rem}
+.pc-type{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:.65rem}
+.pc-info{font-size:.81rem;font-weight:300;color:var(--muted);line-height:1.7}
+.pc-info span{display:block}
+.pc-side{padding:1.3rem 1.4rem;display:flex;flex-direction:column;align-items:flex-end;justify-content:space-between;border-left:1px solid #ece6de;min-width:105px}
+.pc-stars{font-size:.78rem;font-weight:500;color:var(--gold)}
+.pc-link{font-size:.6rem;font-weight:400;letter-spacing:.17em;text-transform:uppercase;color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(200,169,110,.3);padding-bottom:1px;transition:color .2s}
+.pc-link:hover{color:var(--brown)}
+.rsvp-wrap{max-width:540px;margin:0 auto}
+.deadline-box{display:flex;align-items:center;gap:1.4rem;background:var(--dark);padding:1.4rem 1.8rem;margin-bottom:2.8rem;border-left:3px solid var(--gold)}
+.dl-icon{font-size:1.7rem;opacity:.7}
+.dl-label{font-size:.6rem;font-weight:400;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:.25rem}
+.dl-date{font-family:'Playfair Display',serif;font-size:1.35rem;font-style:italic;color:var(--gold)}
+.cdown-row{display:grid;grid-template-columns:repeat(4,1fr);gap:.7rem;margin-bottom:2.8rem}
+.cdown-unit{text-align:center;padding:1.1rem .4rem;background:#fff;border:1px solid #ece6de}
+.cdown-num{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:500;color:var(--brown);display:block}
+.cdown-lbl{font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-top:.25rem;display:block}
+.fg{margin-bottom:1.2rem}
+.fg label{display:block;font-size:.6rem;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
+.fg input,.fg select,.fg textarea{width:100%;padding:.88rem 1rem;background:#fff;border:1px solid #ddd6cc;color:var(--dark);font-family:'Raleway',sans-serif;font-size:.87rem;font-weight:300;outline:none;transition:border-color .2s;appearance:none}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(200,169,110,.08)}
+.fg textarea{height:85px;resize:none}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.btn-send{width:100%;padding:1rem;background:var(--dark);border:1px solid var(--gold);color:var(--gold);font-family:'Raleway',sans-serif;font-size:.7rem;font-weight:400;letter-spacing:.35em;text-transform:uppercase;cursor:pointer;transition:all .2s;margin-top:.4rem}
+.btn-send:hover{background:var(--gold);color:#fff}
+.rsvp-ok{display:none;text-align:center;padding:3rem 2rem}
+.rsvp-ok-icon{font-size:3rem;margin-bottom:1.5rem}
+.rsvp-ok h3{font-family:'Playfair Display',serif;font-style:italic;font-size:1.8rem;color:var(--brown);margin-bottom:1rem}
+.rsvp-ok p{font-size:.9rem;font-weight:300;color:var(--muted);line-height:1.8}
+.pg-foot{background:var(--dark);text-align:center;padding:2.5rem 2rem;border-top:1px solid rgba(200,169,110,.1)}
+.pf-names{font-family:'Playfair Display',serif;font-style:italic;font-size:1.5rem;color:var(--gold);margin-bottom:.4rem}
+.pf-sub{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.15)}
+@media(max-width:640px){
+  .gallery-grid{grid-template-columns:1fr 1fr}
+  .g-item:nth-child(1){grid-column:span 2;grid-row:span 1}
+  .g-item:nth-child(5){grid-column:span 2}
+  .frow{grid-template-columns:1fr}
+  .cdown-num{font-size:1.4rem}
+  .pc{grid-template-columns:4px 1fr}
+  .pc-side{display:none}
+  .menu-card{padding:1.5rem 1.2rem}
+  .nav-btn{padding:.85rem .75rem;font-size:.6rem}
+}
+</style>
+</head>
+<body>
+<nav class="ribbon">
+  <div class="ribbon-inner">
+    <div class="ribbon-logo" onclick="go('home')">É &amp; P · 2027</div>
+    <div class="nav-item"><button class="nav-btn" onclick="go('galerie')">Galerie</button></div>
+    <div class="nav-item" id="ni-menus">
+      <button class="nav-btn" id="nb-menus" onclick="toggleDrop('menus')">Les Menus <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 1l4 4 4-4"/></svg></button>
+      <div class="dropdown" id="dd-menus">
+        <div class="dd-item" onclick="go('menu-cocktail')"><span class="dd-dot"></span>Cocktail dînatoire</div>
+        <div class="dd-item" onclick="go('menu-reception')"><span class="dd-dot"></span>Réception · Dîner</div>
+        <div class="dd-item" onclick="go('menu-desserts')"><span class="dd-dot"></span>Gâteau &amp; Desserts</div>
+      </div>
+    </div>
+    <div class="nav-item" id="ni-places">
+      <button class="nav-btn" id="nb-places" onclick="toggleDrop('places')">À Proximité <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 1l4 4 4-4"/></svg></button>
+      <div class="dropdown" id="dd-places">
+        <div class="dd-item" onclick="go('hotels')"><span class="dd-dot"></span>Hôtels</div>
+        <div class="dd-item" onclick="go('restaurants')"><span class="dd-dot"></span>Restaurants</div>
+        <div class="dd-item" onclick="go('commerces')"><span class="dd-dot"></span>Centres commerciaux</div>
+        <div class="dd-item" onclick="go('voitures')"><span class="dd-dot"></span>Location de voiture</div>
+      </div>
+    </div>
+    <div class="nav-item"><button class="nav-btn" id="nb-rsvp" onclick="go('rsvp')">Réservation</button></div>
+  </div>
+</nav>
+
+<div id="page-home" class="page active" style="padding-top:0">
+  <div style="background:var(--dark);display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;text-align:center;position:relative;overflow:hidden;">
+    <div class="hbg"></div>
+    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none">
+      <div class="hring"></div><div class="hring"></div><div class="hring"></div>
+    </div>
+    <div class="hcontent">
+      <p class="heyebrow">Vous êtes cordialement invités au mariage de</p>
+      <div class="hnames"><span class="it">Époux</span><span class="hamp">&amp;</span><span class="it">Épouse</span></div>
+      <div class="hsep"></div>
+      <p class="hdate">Samedi · 31 Juillet 2027</p>
+      <p class="hvenue">Plaza Rive-Sud · La Prairie, Québec</p>
+      <p class="hhint">Utilisez le menu ci-dessus pour naviguer</p>
+    </div>
+  </div>
+</div>
+
+<div id="page-galerie" class="page">
+  <div class="pg-shell">
+    <div class="pg-hero"><div class="pg-hero-glow"></div><p class="pg-eyebrow">Nos souvenirs</p><h1 class="pg-title">Galerie Photo</h1><p class="pg-sub">Époux &amp; Épouse · Notre histoire</p></div>
+    <div class="pg-body">
+      <div class="gallery-intro"><p>Une sélection de nos moments les plus précieux — de notre première rencontre jusqu'à la veille de notre grand jour. Chaque photo raconte un chapitre de notre histoire d'amour.</p></div>
+      <div class="gallery-grid">
+        <div class="g-item"><div class="g-ph"><div class="g-ph-inner"><span class="g-icon">🌿</span><span class="g-lbl">Portrait principal</span></div></div></div>
+        <div class="g-item"><div class="g-ph"><div class="g-ph-inner"><span class="g-icon">💍</span><span class="g-lbl">La demande</span></div></div></div>
+        <div class="g-item"><div class="g-ph"><div class="g-ph-inner"><span class="g-icon">🥂</span><span class="g-lbl">Nos fiançailles</span></div></div></div>
+        <div class="g-item"><div class="g-ph"><div class="g-ph-inner"><span class="g-icon">🌸</span><span class="g-lbl">Voyage ensemble</span></div></div></div>
+        <div class="g-item"><div class="g-ph"><div class="g-ph-inner"><span class="g-icon">✨</span><span class="g-lbl">Séance photo</span></div></div></div>
+        <div class="g-item"><div class="g-ph"><div class="g-ph-inner"><span class="g-icon">🌙</span><span class="g-lbl">Notre soirée</span></div></div></div>
+      </div>
+      <div class="upload-note"><strong>Pour les mariés</strong> — Remplacez les zones grises par vos vraies photos en ajoutant une balise img dans chaque .g-item</div>
+    </div>
+    <footer class="pg-foot"><div class="pf-names">Époux &amp; Épouse</div><div class="pf-sub">31 Juillet 2027 · Plaza Rive-Sud</div></footer>
+  </div>
+</div>
+
+<div id="page-menu-cocktail" class="page">
+  <div class="pg-shell">
+    <div class="pg-hero"><div class="pg-hero-glow"></div><p class="pg-eyebrow">À votre arrivée</p><h1 class="pg-title">Cocktail Dînatoire</h1><p class="pg-sub">18h00 – 19h30 · Terrasse du Plaza</p></div>
+    <div class="pg-body">
+      <div class="menu-card">
+        <div class="mc-title">Cocktail de Bienvenue</div><div class="mc-sub">Samedi 31 Juillet 2027</div>
+        <div class="mc-sec">Bouchées chaudes</div>
+        <div class="mi"><div class="mi-name">Brochettes de crevettes grillées</div><span class="mi-desc">Sauce aigre-douce aux agrumes, fleur de sel</span></div>
+        <div class="mi"><div class="mi-name">Feuilletés au brie et canneberges</div><span class="mi-desc">Pâte feuilletée dorée, confiture de canneberges du Québec</span></div>
+        <div class="mi"><div class="mi-name">Mini tartare de bœuf</div><span class="mi-desc">Câpres, moutarde de Dijon, croustilles de pain noir</span></div>
+        <hr class="mc-divider"/>
+        <div class="mc-sec">Bouchées froides</div>
+        <div class="mi"><div class="mi-name">Verrines de saumon fumé</div><span class="mi-desc">Crème fraîche, aneth frais, caviar de saumon</span></div>
+        <div class="mi"><div class="mi-name">Caprese sur brochette</div><span class="mi-desc">Bocconcini, tomates cerises, basilic, huile d'olive vierge extra</span></div>
+        <hr class="mc-divider"/>
+        <div class="mc-sec">Boissons</div>
+        <div class="mi"><div class="mi-name">Champagne Moët &amp; Chandon</div><span class="mi-desc">Brut Impérial · Service à la coupe</span></div>
+        <div class="mi"><div class="mi-name">Cocktail signature des mariés</div><span class="mi-desc">Framboises fraîches, prosecco rosé, sirop de rose</span></div>
+        <div class="mi"><div class="mi-name">Jus naturels &amp; eaux pétillantes</div><span class="mi-desc">Options sans alcool en tout temps</span></div>
+        <div class="mc-note">🌿 Options végétariennes et sans gluten disponibles. Indiquez vos restrictions lors de votre confirmation.</div>
+      </div>
+    </div>
+    <footer class="pg-foot"><div class="pf-names">Époux &amp; Épouse</div><div class="pf-sub">31 Juillet 2027 · Plaza Rive-Sud</div></footer>
+  </div>
+</div>
+
+<div id="page-menu-reception" class="page">
+  <div class="pg-shell">
+    <div class="pg-hero"><div class="pg-hero-glow"></div><p class="pg-eyebrow">Le grand festin</p><h1 class="pg-title">Dîner de Réception</h1><p class="pg-sub">20h00 – 23h30 · Salle Héron Vert</p></div>
+    <div class="pg-body">
+      <div class="menu-card">
+        <div class="mc-title">Menu Gastronomique</div><div class="mc-sub">Table d'honneur · Service aux tables</div>
+        <div class="mc-sec">Entrées</div>
+        <div class="mi"><div class="mi-name">Velouté de butternut rôti</div><span class="mi-desc">Huile de truffe, crème fouettée aux herbes, noisettes torréfiées</span></div>
+        <div class="mi"><div class="mi-name">Salade de betteraves multicolores</div><span class="mi-desc">Fromage de chèvre chaud, noix de Grenoble, vinaigrette miel-balsamique</span></div>
+        <hr class="mc-divider"/>
+        <div class="mc-sec">Plats principaux · Choix de l'invité</div>
+        <div class="mi"><div class="mi-name">Filet mignon de bœuf Angus</div><span class="mi-desc">Sauce champignons sauvages, gratin dauphinois, haricots verts fins</span></div>
+        <div class="mi"><div class="mi-name">Suprême de poulet rôti</div><span class="mi-desc">Jus au thym, purée de panais dorée, asperges blanches</span></div>
+        <div class="mi"><div class="mi-name">Saumon sauvage en croûte d'herbes</div><span class="mi-desc">Beurre blanc au citron Meyer, risotto petits pois et menthe</span></div>
+        <div class="mi"><div class="mi-name">Risotto aux champignons — végétarien</div><span class="mi-desc">Parmesan affiné 24 mois, truffe d'été, huile vierge extra</span></div>
+        <hr class="mc-divider"/>
+        <div class="mc-sec">Vins de la soirée</div>
+        <div class="mi"><div class="mi-name">Blanc · Chablis Premier Cru</div><span class="mi-desc">Domaine Moreau-Naudet</span></div>
+        <div class="mi"><div class="mi-name">Rouge · Saint-Émilion Grand Cru</div><span class="mi-desc">Château Fonplégade</span></div>
+        <div class="mc-note">🍷 Indiquez votre choix de plat et allergies lors de votre confirmation.</div>
+      </div>
+    </div>
+    <footer class="pg-foot"><div class="pf-names">Époux &amp; Épouse</div><div class="pf-sub">31 Juillet 2027 · Plaza Rive-Sud</div></footer>
+  </div>
+</div>
+
+<div id="page-menu-desserts" class="page">
+  <div class="pg-shell">
+    <div class="pg-hero"><div class="pg-hero-glow"></div><p class="pg-eyebrow">La douceur finale</p><h1 class="pg-title">Gâteau &amp; Desserts</h1><p class="pg-sub">Minuit · Découpe officielle en soirée</p></div>
+    <div class="pg-body">
+      <div class="menu-card">
+        <div class="mc-title">Table de Douceurs</div><div class="mc-sub">Décoration florale · Pièce maîtresse</div>
+        <div class="mc-sec">Notre gâteau de mariage</div>
+        <div class="mi"><div class="mi-name">Gâteau à 4 étages</div><span class="mi-desc">Génoises vanille de Madagascar · Crème au beurre fleur d'oranger · Décor en sucre tiré et fleurs fraîches</span></div>
+        <hr class="mc-divider"/>
+        <div class="mc-sec">Table de douceurs</div>
+        <div class="mi"><div class="mi-name">Macarons parisiens assortis</div><span class="mi-desc">Framboise, pistache, chocolat noir, rose litchi</span></div>
+        <div class="mi"><div class="mi-name">Crème brûlée à la lavande</div><span class="mi-desc">Verrine individuelle, caramélisée à la flamme</span></div>
+        <div class="mi"><div class="mi-name">Tartelettes aux fruits frais</div><span class="mi-desc">Sablé breton, crème pâtissière, fruits de saison</span></div>
+        <div class="mi"><div class="mi-name">Chocolats artisanaux québécois</div><span class="mi-desc">Noir, lait et blanc</span></div>
+        <hr class="mc-divider"/>
+        <div class="mc-sec">Café &amp; Thé</div>
+        <div class="mi"><div class="mi-name">Café filtre &amp; espresso</div><span class="mi-desc">Torréfaction locale</span></div>
+        <div class="mi"><div class="mi-name">Sélection de thés fins</div><span class="mi-desc">Earl Grey, Chamomille, Menthe, Rooibos vanille</span></div>
+        <div class="mc-note">🎂 Découpe du gâteau vers minuit, accompagnée du premier slow des mariés.</div>
+      </div>
+    </div>
+    <footer class="pg-foot"><div class="pf-names">Époux &amp; Épouse</div><div class="pf-sub">31 Juillet 2027 · Plaza Rive-Sud</div></footer>
+  </div>
+</div>
+
+<div id="page-hotels" class="page">
+  <div class="pg-shell">
+    <div class="pg-hero"><div class="pg-hero-glow"></div><p class="pg-eyebrow">Votre hébergement</p><h1 class="pg-title">Hôtels à Proximité</h1><p class="pg-sub">Moins de 15 min du Plaza Rive-Sud</p></div>
+    <div class="pg-body">
+      <div class="place-list">
+        <div class="pc"><div class="pc-accent"></div><div class="pc-body"><div class="pc-name">Hôtel Escad Quartier DIX30</div><div class="pc-type">Boutique · Luxe · ⭐ Recommandé</div><div class="pc-info"><span>📍 1020 Rue du Lux, Brossard</span><span>🕐 24h/24 · 7j/7 · 📞 +1 450-500-9156</span><span style="margin-top:.5rem">Vue panoramique, restaurant gastronomique, stationnement souterrain. Notre première recommandation.</span></div></div><div class="pc-side"><div class="pc-stars">★ 4.7 / 5</div><a href="https://www.google.com/maps/search/Hotel+Escad+DIX30+Brossard" target="_blank" class="pc-link">Itinéraire →</a></div></div>
+        <div class="pc"><div class="pc-accent"></div><div class="pc-body"><div class="pc-name">Alt Hotel Brossard</div><div class="pc-type">Design · Tendance · Accès REM</div><div class="pc-info"><span>📍 6500 Boul. de Rome, Brossard</span><span>🕐 24h/24 · 7j/7 · 📞 +1 450-443-1030</span><span style="margin-top:.5rem">Hôtel design branché, accès direct au REM, animaux bienvenus.</span></div></div><div class="pc-side"><div class="pc-stars">★ 4.4 / 5</div><a href="https://www.google.com/maps/search/Alt+Hotel+Brossard" target="_blank" class="pc-link">Itinéraire →</a></div></div>
+        <div class="pc"><div class="pc-accent"></div><div class="pc-body"><div class="pc-name">Hôtel Brossard</div><div class="pc-type">Confort · Standard · 3 étoiles</div><div class="pc-info"><span>📍 5740 Bd Marie-Victorin, Brossard</span><span>🕐 24h/24 · 📞 +1 877-890-1008</span><span style="margin-top:.5rem">Stationnement gratuit, déjeuner continental inclus, chambres spacieuses.</span></div></div><div class="pc-side"><div class="pc-stars">★ 4.2 / 5</div><a href="https://www.google.com/maps/search/Hotel+Brossard" target="_blank" class="pc-link">Itinéraire →</a></div></div>
+        <div class="pc"><div class="pc-accent"></div><div class="pc-body"><div class="pc-name">Best Western Brossard</div><div class="pc-type">Économique · Fonctionnel</div><div class="pc-info"><span>📍 7746 Bd Taschereau, Brossard</span><span>📞 +1 450-466-6756</span><span style="margin-top:.5rem">Piscine intérieure chauffée, stationnement sécurisé, déjeuner chaud inclus.</span></div></div><div class="pc-side"><div class="pc-stars">★ 3.9 / 5</div><a href="https://www.google.com/maps/search/Best+Western+Brossard" target="_blank" class="pc-link">Itinéraire →</a></div></div>
+      </div>
+    </div>
+    <footer class="pg-foot"><div class="pf-names">Époux &amp; Épouse</div><div class="pf-sub">31 Juillet 2027 · Plaza Rive-Sud</div></footer>
+  </div>
+</div>
+
+<div id="page-restaurants" class="page">
+  <div class="pg-shell">
+    <div class="pg-hero"><div class="pg-hero-glow"></div><p class="pg-eyebrow">Bonnes adresses</p><h1 class="pg-title">Restaurants</h1><p class="pg-sub">Nos suggestions pour votre séjour</p></div>
+    <div class="pg-body">
+      <div class="place-list">
+        <div class="pc"><div class="pc-accent"></div><div class="pc-body"><div class="pc-name">Péché Matinal</div><div class="pc-type">Brunch gastronomique · Longueuil</div><div class="pc-info"><span>📍 337 Rue Saint-Charles O, Longueuil</span><span>🕐 Mer–Dim 8h–15h · 📞 +1 450-616-6240</span><span style="margin-top:.5rem">L'incontournable du brunch sur la Rive-Sud. Menu créatif, service impeccable.</span></div></div><div class="pc-side"><div class="pc-stars">★ 4.7 / 5</div><a href="https://www.google.com/maps/search/Peche+Matinal+Longueuil" target="_blank" class="pc-link">Itinéraire →</a></div></div>
+        <div class="pc"><div class="pc-accent"></div><div class="pc-body"><div class="pc-name">Le Marlow Restaurant</div><div class="pc-type">Gastronomique · Apportez votre vin</div><div class="pc-info"><span>📍 7161 Bd Cousineau, Saint-Hubert</span><span>🕐 Mer–Dim 17h30–22h · 📞 +1 450-486-4482</span><span style="margin-top:.5rem">Joyau de la gastronomie québécoise. Menu saisonnier. Idéal pour un dîner romantique.</span></div></div><div class="pc-side"><div class="pc-stars">★ 4.7 / 5</div><a href="https://www.google.com/maps/search/Le+Marlow+Saint-Hubert" target="_blank" class="pc-link">Itinéraire →</a></div></div>
+        <div class="pc"><div class="pc-accent"></div><div class="pc-body"><div class="pc-name">L'Avenue Brossard</div><div class="pc-type">Brunch tendance · Brossard</div><div class="pc-info"><span>📍 8255 Bd Taschereau, Brossard</span><span>🕐 Lun–Dim 8h–16h · 📞 +1 450-486-7505</span><span style="margin-top:.5rem">Brunch festif, grandes portions, ambiance animée. Parfait pour toute la famille.</span></div></div><div class="pc-side"><div class="pc-stars">★ 4.4 / 5</div><a href="https://www.google.com/maps/search/L+Avenue+Brossard" target="_blank" class="pc-link">Itinéraire →</a></div></div>
+      </div>
+    </div>
+    <footer class="pg-foot"><div class="pf-names">Époux &amp; Épouse</div><div class="pf-sub">31 Juillet 2027 · Plaza Rive-Sud</div></footer>
+  </div>
+</div>
+
+<div id="page-commerces" class="page">
+  <div class="pg-shell">
+    <div class="pg-hero"><div class="pg-hero-glow"></div><p class="pg-eyebrow">Magasinage</p><h1 class="pg-title">Centres Commerciaux</h1><p class="pg-sub">Les meilleures adresses à proximité</p></div>
+    <div class="pg-body">
+      <div class="place-list">
+        <div class="pc"><div class="pc-accent"></div><div class="pc-body"><div class="pc-name">Quartier DIX30</div><div class="pc-type">Centre lifestyle · Plein air · ⭐ Recommandé</div><div class="pc-info"><span>📍 Brossard · Accès direct au REM</span><span>🕐 Lun–Mer 10h–18h · Jeu–Ven 10h–21h · Sam 9h–17h · Dim 10h–17h</span><span style="margin-top:.5rem">300+ boutiques, restaurants, cinéma, spa. Le plus grand centre à ciel ouvert du Québec.</span></div></div><div class="pc-side"><div class="pc-stars">★ 4.5 / 5</div><a href="https://www.google.com/maps/search/Quartier+DIX30+Brossard" target="_blank" class="pc-link">Itinéraire →</a></div></div>
+        <div class="pc"><div class="pc-accent"></div><div class="pc-body"><div class="pc-name">Place Longueuil</div><div class="pc-type">Centre commercial · Longueuil</div><div class="pc-info"><span>📍 825 Rue Saint-Laurent O, Longueuil</span><span>🕐 Lun–Mer 10h–18h · Jeu–Ven 10h–21h · Sam 9h–17h · Dim 10h–17h</span><span style="margin-top:.5rem">IGA, Winners, Dollarama, SAAQ, pharmacies. Stationnement gratuit.</span></div></div><div class="pc-side"><div class="pc-stars">★ 4.1 / 5</div><a href="https://www.google.com/maps/search/Place+Longueuil" target="_blank" class="pc-link">Itinéraire →</a></div></div>
+        <div class="pc"><div class="pc-accent"></div><div class="pc-body"><div class="pc-name">Centre Jacques-Cartier</div><div class="pc-type">Centre de quartier · Services essentiels</div><div class="pc-info"><span>📍 1401 Ch. de Chambly, Longueuil</span><span>🕐 Lun–Ven 10h–21h · Sam–Dim 9h–17h</span><span style="margin-top:.5rem">IGA, pharmacie, boutiques de services. Pratique pour les courses quotidiennes.</span></div></div><div class="pc-side"><div class="pc-stars">★ 3.8 / 5</div><a href="https://www.google.com/maps/search/Centre+Jacques-Cartier+Longueuil" target="_blank" class="pc-link">Itinéraire →</a></div></div>
+      </div>
+    </div>
+    <footer class="pg-foot"><div class="pf-names">Époux &amp; Épouse</div><div class="pf-sub">31 Juillet 2027 · Plaza Rive-Sud</div></footer>
+  </div>
+</div>
+
+<div id="page-voitures" class="page">
+  <div class="pg-shell">
+    <div class="pg-hero"><div class="pg-hero-glow"></div><p class="pg-eyebrow">Mobilité</p><h1 class="pg-title">Location de Voiture</h1><p class="pg-sub">Se déplacer facilement sur la Rive-Sud</p></div>
+    <div class="pg-body">
+      <div class="place-list">
+        <div class="pc"><div class="pc-accent"></div><div class="pc-body"><div class="pc-name">Delvan Longueuil</div><div class="pc-type">Location locale · ⭐ Recommandé</div><div class="pc-info"><span>📍 370 Bd Taschereau, Longueuil</span><span>🕐 Lun–Ven 7h30–17h · Sam 8h–12h · 📞 +1 450-646-3838</span><span style="margin-top:.5rem">Service exceptionnel, large choix (VUS, fourgonnettes, berlines). Avis unanimement élogieux.</span></div></div><div class="pc-side"><div class="pc-stars">★ 4.7 / 5</div><a href="https://www.google.com/maps/search/Delvan+Longueuil" target="_blank" class="pc-link">Itinéraire →</a></div></div>
+        <div class="pc"><div class="pc-accent"></div><div class="pc-body"><div class="pc-name">Enterprise – Curé-Poirier</div><div class="pc-type">Chaîne nationale · Grand inventaire</div><div class="pc-info"><span>📍 900 Bd Curé-Poirier O, Longueuil</span><span>🕐 Lun–Ven 7h30–18h · Sam 8h–13h · 📞 +1 450-670-6700</span><span style="margin-top:.5rem">Grand inventaire. Réservation en ligne recommandée à l'avance.</span></div></div><div class="pc-side"><div class="pc-stars">★ 3.9 / 5</div><a href="https://www.google.com/maps/search/Enterprise+Longueuil+Cure-Poirier" target="_blank" class="pc-link">Itinéraire →</a></div></div>
+        <div class="pc"><div class="pc-accent"></div><div class="pc-body"><div class="pc-name">Enterprise – Roland-Therrien</div><div class="pc-type">Chaîne nationale · Nord Longueuil</div><div class="pc-info"><span>📍 100 Bd Roland-Therrien, Longueuil</span><span>🕐 Lun–Ven 7h30–17h · 📞 +1 450-646-4846</span><span style="margin-top:.5rem">Deuxième succursale Enterprise, service efficace et attentionné.</span></div></div><div class="pc-side"><div class="pc-stars">★ 4.2 / 5</div><a href="https://www.google.com/maps/search/Enterprise+Longueuil+Roland-Therrien" target="_blank" class="pc-link">Itinéraire →</a></div></div>
+      </div>
+    </div>
+    <footer class="pg-foot"><div class="pf-names">Époux &amp; Épouse</div><div class="pf-sub">31 Juillet 2027 · Plaza Rive-Sud</div></footer>
+  </div>
+</div>
+
+<div id="page-rsvp" class="page">
+  <div class="pg-shell">
+    <div class="pg-hero"><div class="pg-hero-glow"></div><p class="pg-eyebrow">Confirmez votre présence</p><h1 class="pg-title">Réservation</h1><p class="pg-sub">31 Juillet 2027 · Plaza Rive-Sud · La Prairie</p></div>
+    <div class="pg-body">
+      <div class="rsvp-wrap">
+        <div class="deadline-box"><div class="dl-icon">📅</div><div><div class="dl-label">Date limite de confirmation</div><div class="dl-date">31 Décembre 2026</div></div></div>
+        <div class="cdown-row">
+          <div class="cdown-unit"><span class="cdown-num" id="cd-j">---</span><span class="cdown-lbl">Jours</span></div>
+          <div class="cdown-unit"><span class="cdown-num" id="cd-h">--</span><span class="cdown-lbl">Heures</span></div>
+          <div class="cdown-unit"><span class="cdown-num" id="cd-m">--</span><span class="cdown-lbl">Minutes</span></div>
+          <div class="cdown-unit"><span class="cdown-num" id="cd-s">--</span><span class="cdown-lbl">Secondes</span></div>
+        </div>
+        <form id="rsvp-form" onsubmit="submitRSVP(event)">
+          <div class="frow">
+            <div class="fg"><label>Prénom *</label><input type="text" placeholder="Votre prénom" required/></div>
+            <div class="fg"><label>Nom *</label><input type="text" placeholder="Votre nom" required/></div>
+          </div>
+          <div class="fg"><label>Adresse courriel *</label><input type="email" placeholder="votre@email.com" required/></div>
+          <div class="fg"><label>Confirmerez-vous votre présence ? *</label>
+            <select required><option value="">— Sélectionnez —</option><option value="oui">✓ Oui, je serai présent(e) avec joie !</option><option value="non">✗ Je suis désolé(e), je ne pourrai pas venir</option></select>
+          </div>
+          <div class="frow">
+            <div class="fg"><label>Nombre de personnes</label>
+              <select><option value="1">1 personne</option><option value="2">2 personnes</option><option value="3">3 personnes</option><option value="4">4 personnes</option></select>
+            </div>
+            <div class="fg"><label>Choix du plat principal</label>
+              <select><option value="">— Votre préférence —</option><option>Filet mignon de bœuf Angus</option><option>Suprême de poulet rôti</option><option>Saumon sauvage</option><option>Option végétarienne</option></select>
+            </div>
+          </div>
+          <div class="fg"><label>Restrictions ou message</label><textarea placeholder="Allergies, régime particulier, message aux mariés..."></textarea></div>
+          <button type="submit" class="btn-send">Envoyer ma confirmation</button>
+        </form>
+        <div class="rsvp-ok" id="rsvp-ok">
+          <div class="rsvp-ok-icon">🌿</div>
+          <h3>Merci infiniment !</h3>
+          <p>Votre confirmation a bien été enregistrée.<br>Nous avons tellement hâte de célébrer avec vous<br>le <strong>31 juillet 2027</strong> au Plaza Rive-Sud !</p>
+        </div>
+      </div>
+    </div>
+    <footer class="pg-foot"><div class="pf-names">Époux &amp; Épouse</div><div class="pf-sub">31 Juillet 2027 · Plaza Rive-Sud · La Prairie, Québec</div></footer>
+  </div>
+</div>
+
+<script>
+function go(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>{b.classList.remove('active');b.classList.remove('open')});
+  document.querySelectorAll('.dropdown').forEach(d=>d.classList.remove('open'));
+  var pg=document.getElementById('page-'+id);
+  if(pg){pg.classList.add('active');window.scrollTo({top:0,behavior:'smooth'})}
+  if(id==='rsvp'){var b=document.getElementById('nb-rsvp');if(b)b.classList.add('active')}
+  closeDrop();
+}
+function toggleDrop(id){
+  var dd=document.getElementById('dd-'+id);
+  var nb=document.getElementById('nb-'+id);
+  var open=dd.classList.contains('open');
+  closeDrop();
+  if(!open){dd.classList.add('open');nb.classList.add('open')}
+}
+function closeDrop(){
+  document.querySelectorAll('.dropdown').forEach(d=>d.classList.remove('open'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('open'));
+}
+document.addEventListener('click',function(e){if(!e.target.closest('.nav-item'))closeDrop()});
+function tick(){
+  var t=new Date('2026-12-31T23:59:59')-new Date();
+  if(t<0)t=0;
+  document.getElementById('cd-j').textContent=String(Math.floor(t/86400000)).padStart(3,'0');
+  document.getElementById('cd-h').textContent=String(Math.floor(t%86400000/3600000)).padStart(2,'0');
+  document.getElementById('cd-m').textContent=String(Math.floor(t%3600000/60000)).padStart(2,'0');
+  document.getElementById('cd-s').textContent=String(Math.floor(t%60000/1000)).padStart(2,'0');
+}
+setInterval(tick,1000);tick();
+function submitRSVP(e){
+  e.preventDefault();
+  document.getElementById('rsvp-form').style.display='none';
+  document.getElementById('rsvp-ok').style.display='block';
+}
+</script>
+</body>
+</html>
